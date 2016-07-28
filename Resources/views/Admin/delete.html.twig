@@ -1,0 +1,26 @@
+{# src/OC/CoreBundle/Resources/views/Admin/delete.html.twig #}
+
+{% extends "OCCoreBundle:Admin:layout.html.twig" %}
+
+
+{% block body %}
+
+  <h2>Supprimer une page</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer la page "{{ page.title }}" ?
+  </p>
+
+  {# On met l'id de la page dans la route de l'action du formulaire #}
+  <form action="{{ path('oc_core_delete', {'slug': page.slug}) }}" method="post">
+    <a href="{{ path('oc_core_homepage', {'id': page.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour à l'accueil
+    </a>
+    {# Ici j'ai écrit le bouton de soumission à la main #}
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {# Ceci va générer le champ CSRF #}
+    {{ form_rest(form) }}
+  </form>
+
+{% endblock %}

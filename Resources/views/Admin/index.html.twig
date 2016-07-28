@@ -1,0 +1,30 @@
+{# src/OC/CoreBundle/Resources/views/Admin/index.html.twig #}
+
+{% extends "OCCoreBundle:Admin:layout.html.twig" %}
+
+{% block title %}
+  Index
+{% endblock %}
+
+{% block body %}
+
+  <h2>Liste des pages</h2>
+
+  <ul>
+    {% for page in listPages %}
+      <li>
+        <a href="{{ path('oc_core_view', {'slug': page.slug}) }}">
+          {{ page.title }}
+        </a> <br>
+        <a href="{{ path('oc_core_edit', {'slug': page.slug}) }}" class="btn btn-warning"> Edit </a> 
+        <a href="{{ path('oc_core_delete', {'slug': page.slug}) }}" class="btn btn-danger"> Delete </a>
+      </li>
+    {% else %}
+      <li>Pas (encore !) de page</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{{ path('oc_core_add') }}" class ="btn btn-success" > Ajouter un article </a>
+
+
+{% endblock %}

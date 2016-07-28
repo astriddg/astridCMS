@@ -1,0 +1,24 @@
+oc_core_homepage:
+    path:     /
+    defaults: { _controller: OCCoreBundle:Page:index }
+
+oc_core_view:
+    path:      /page/{slug}
+    defaults:
+        _controller: OCCoreBundle:Page:view
+
+
+oc_core_add:
+    path:      /add
+    defaults:
+        _controller: OCCoreBundle:Page:add
+
+oc_core_edit:
+    path:      /edit/{slug}
+    defaults:
+        _controller: OCCoreBundle:Page:edit
+
+oc_core_delete:
+    path:      /delete/{slug}
+    defaults:
+        _controller: OCCoreBundle:Page:delete
