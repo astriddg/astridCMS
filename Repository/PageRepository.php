@@ -13,6 +13,8 @@ class PageRepository extends EntityRepository
   public function getPages()
   {
     $query = $this->createQueryBuilder('p')
+      ->leftJoin('p.category', 'c')
+      ->addSelect('c')
       ->getQuery()
     ;
 

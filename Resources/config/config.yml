@@ -1,0 +1,4 @@
+parameters:
+  versionning: true
+  default_access: true
+  default_access_value: 'anonymous'

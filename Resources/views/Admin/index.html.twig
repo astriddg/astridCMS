@@ -10,19 +10,26 @@
 
   <h2>Liste des pages</h2>
 
-  <ul>
+
+  {% for category in listCats %}
+    <h3> {{ category.name }}</h3>
+    <ul>
     {% for page in listPages %}
-      <li>
-        <a href="{{ path('oc_core_view', {'slug': page.slug}) }}">
-          {{ page.title }}
-        </a> <br>
-        <a href="{{ path('oc_core_edit', {'slug': page.slug}) }}" class="btn btn-warning"> Edit </a> 
-        <a href="{{ path('oc_core_delete', {'slug': page.slug}) }}" class="btn btn-danger"> Delete </a>
-      </li>
-    {% else %}
-      <li>Pas (encore !) de page</li>
+      {% if page.category.id == category.id %}
+        <li>
+          <a href="{{ path('oc_core_view', {'category': page.category.name, 'slug': page.slug}) }}">
+            {{ page.title }}
+          </a> <br>
+          <a href="{{ path('oc_core_versions', {'slug': page.slug}) }}" class="btn btn-info"> See Old Versions </a>
+          <a href="{{ path('oc_core_edit', {'slug': page.slug}) }}" class="btn btn-warning"> Edit </a> 
+          <a href="{{ path('oc_core_delete', {'slug': page.slug}) }}" class="btn btn-danger"> Delete </a>
+        </li>
+      {% endif %}
     {% endfor %}
-  </ul>
+    </ul>
+  {% endfor %}
+      
+  
 
   <a href="{{ path('oc_core_add') }}" class ="btn btn-success" > Ajouter un article </a>
 

@@ -58,15 +58,6 @@ class Page
      */
     private $roleaccess;
 
-
-    public function __construct()
-    {
-        if ($this->container->getParameter('default_access')) {
-            $this->roleaccess = $this->container->getParameter('default_access_value');
-        }
-        
-    }
-
     /**
      * Get id
      *
@@ -170,29 +161,5 @@ class Page
     public function getCategory()
     {
         return $this->category;
-    }
-
-    /**
-     * Set roleaccess
-     *
-     * @param string $roleaccess
-     *
-     * @return Page
-     */
-    public function setRoleaccess($roleaccess)
-    {
-        $this->roleaccess = $roleaccess;
-
-        return $this;
-    }
-
-    /**
-     * Get roleaccess
-     *
-     * @return string
-     */
-    public function getRoleaccess()
-    {
-        return $this->roleaccess;
     }
 }

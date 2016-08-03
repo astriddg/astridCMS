@@ -8,15 +8,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Page
+ * Version
  *
- * @ORM\Table(name="page")
- * @ORM\Entity(repositoryClass="OC\CoreBundle\Repository\PageRepository")
- * @UniqueEntity(fields="title", message="Une page existe déjà avec ce titre.")
+ * @ORM\Table(name="version")
+ * @ORM\Entity(repositoryClass="OC\CoreBundle\Repository\VersionRepository")
  */
-class Page
+class Version
 {
-    /**
+	/**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -28,7 +27,7 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255, unique=true)
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
@@ -46,7 +45,21 @@ class Page
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="OC\CoreBundle\Entity\Category", cascade={"persist"}, inversedBy="pages")
+     * @ORM\ManyToOne(targetEntity="OC\CoreBundle\Entity\Page", cascade={"persist"})
+     * @Assert\Valid()
+     */
+	private $page;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * @var OC\CoreBundle\Entity\Category
+     * @ORM\ManyToOne(targetEntity="OC\CoreBundle\Entity\Category", cascade={"persist"})
      * @Assert\Valid()
      */
     private $category;
@@ -58,14 +71,18 @@ class Page
      */
     private $roleaccess;
 
-
-    public function __construct()
-    {
-        if ($this->container->getParameter('default_access')) {
-            $this->roleaccess = $this->container->getParameter('default_access_value');
-        }
-        
-    }
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Version
+     */
+    
+     public function __construct()
+  {
+    $this->date = new \Datetime();
+  }
 
     /**
      * Get id
@@ -82,7 +99,7 @@ class Page
      *
      * @param string $title
      *
-     * @return Page
+     * @return Version
      */
     public function setTitle($title)
     {
@@ -106,7 +123,7 @@ class Page
      *
      * @param string $slug
      *
-     * @return Page
+     * @return Version
      */
     public function setSlug($slug)
     {
@@ -130,7 +147,7 @@ class Page
      *
      * @param string $content
      *
-     * @return Page
+     * @return Version
      */
     public function setContent($content)
     {
@@ -147,6 +164,54 @@ class Page
     public function getContent()
     {
         return $this->content;
+    }
+    
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set page
+     *
+     * @param \OC\CoreBundle\Entity\Page $page
+     *
+     * @return Version
+     */
+    public function setPage(\OC\CoreBundle\Entity\Page $page = null)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return \OC\CoreBundle\Entity\Page
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Version
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
     }
 
     /**
@@ -177,7 +242,7 @@ class Page
      *
      * @param string $roleaccess
      *
-     * @return Page
+     * @return Version
      */
     public function setRoleaccess($roleaccess)
     {

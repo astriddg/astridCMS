@@ -1,24 +1,48 @@
-oc_core_homepage:
+oc_core_home:
     path:     /
+    defaults: { _controller: OCCoreBundle:Page:home }
+
+oc_core_homepage:
+    path:     /admin
     defaults: { _controller: OCCoreBundle:Page:index }
 
 oc_core_view:
-    path:      /page/{slug}
+    path:      /page/{category}/{slug}
     defaults:
         _controller: OCCoreBundle:Page:view
 
 
 oc_core_add:
-    path:      /add
+    path:      /admin/add
     defaults:
         _controller: OCCoreBundle:Page:add
 
 oc_core_edit:
-    path:      /edit/{slug}
+    path:      /admin/edit/{slug}
     defaults:
         _controller: OCCoreBundle:Page:edit
 
 oc_core_delete:
-    path:      /delete/{slug}
+    path:      /admin/delete/{slug}
     defaults:
         _controller: OCCoreBundle:Page:delete
+
+oc_core_addnewcat:
+    path:      /admin/addNewCat
+    defaults:
+        _controller: OCCoreBundle:Page:addNewCat
+
+oc_core_versions:
+    path:      /versions/{slug}
+    defaults:
+        _controller: OCCoreBundle:Page:versions
+
+oc_core_version:
+    path:      /version/{id}
+    defaults:
+        _controller: OCCoreBundle:Page:version
+
+oc_core_replace:
+    path:      /replace/{id}
+    defaults:
+        _controller: OCCoreBundle:Page:replace

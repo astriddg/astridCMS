@@ -12,13 +12,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use OC\CoreBundle\Form\CategoryType;
 
 
-class PageType extends AbstractType
+class PageNewCategoryType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -27,34 +26,19 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title',     TextType::class)
+            ->remove('category')
             ->add('content',     'Ivory\CKEditorBundle\Form\Type\CKEditorType')
             ->add('save',      SubmitType::class)
-            ->add('category', EntityType::class, array(
-                'placeholder' => 'Choose an option',
-                'class' => 'OCCoreBundle:Category',
-                'required' => TRUE,
-                ))
-            ->add('roleaccess', ChoiceType::class, array(
-                'choices'  => array(
-                    'Anonymous' => 'Anonymous',
-                    'Admin' => 'ROLE_ADMIN',
-                    'User' => 'ROLE_USER',
-                    '' => '',
-                    
-                )));
-    
-
+            ->add('category', CategoryType::class, array(
+                'required' => FALSE,
+                'mapped' => TRUE,
+                'property_path' => 'category' ));
+            ;
 
     }
     
-    /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'OC\CoreBundle\Entity\Page'
-        ));
-    }
+    public function getParent()
+  {
+    return PageType::class;
+  }
 }
