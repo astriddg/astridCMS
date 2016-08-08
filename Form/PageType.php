@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use OC\CoreBundle\Form\CategoryType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 
 class PageType extends AbstractType
@@ -28,7 +29,7 @@ class PageType extends AbstractType
     {
         $builder
             ->add('title',     TextType::class)
-            ->add('content',     'Ivory\CKEditorBundle\Form\Type\CKEditorType')
+            ->add('content',     CKEditorBundle::class)
             ->add('save',      SubmitType::class)
             ->add('category', EntityType::class, array(
                 'placeholder' => 'Choose an option',

@@ -27,19 +27,4 @@ class PageRepository extends EntityRepository
   }
 
 
-  public function getPage($slug)
-  {
-    $qb = $this->createQueryBuilder('p');
-
-    $qb
-      ->where('p.slug = :slug')
-      ->setParameter('slug', $slug)
-    ;
-
-    return $qb
-      ->getQuery()
-      ->getResult()
-    ;
-  }
-
 }
