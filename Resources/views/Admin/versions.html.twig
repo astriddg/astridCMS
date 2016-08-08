@@ -1,0 +1,25 @@
+{# src/OC/CoreBundle/Resources/views/Admin/index.html.twig #}
+
+{% extends "OCCoreBundle:Admin:layout.html.twig" %}
+
+{% block title %}
+  Versions - {{ page.title}}
+{% endblock %}
+
+{% block body %}
+
+<h2> Versions - {{ page.title}} </h2>
+
+<ul>
+  {% for version in versions %}
+  <li>
+    <a href="{{ path('oc_core_version', {'id': version.id}) }}">
+            {{ version.title }}
+          </a> - {{ version.date|date('Y-m-d') }} <br>
+          <a href="{{ path('oc_core_replace', {'id': version.id, 'idpage': page.id}) }}" class="btn btn-info"> Return to this version </a>
+    </li>
+  {% endfor %}
+</ul>
+
+
+{% endblock %}

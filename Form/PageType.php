@@ -11,8 +11,12 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use OC\CoreBundle\Form\CategoryType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 
 class PageType extends AbstractType
@@ -25,8 +29,24 @@ class PageType extends AbstractType
     {
         $builder
             ->add('title',     TextType::class)
-            ->add('content',     'Ivory\CKEditorBundle\Form\Type\CKEditorType')
-            ->add('save',      SubmitType::class);
+            ->add('content',     CKEditorType::class)
+            ->add('save',      SubmitType::class)
+            ->add('category', EntityType::class, array(
+                'placeholder' => 'Choose an option',
+                'class' => 'OCCoreBundle:Category',
+                'required' => TRUE,
+                ))
+            ->add('roleaccess', ChoiceType::class, array(
+                'choices'  => array(
+                    'Anonymous' => 'Anonymous',
+                    'Admin' => 'ROLE_ADMIN',
+                    'User' => 'ROLE_USER',
+                    '' => '',
+                    
+                )));
+    
+
+
     }
     
     /**

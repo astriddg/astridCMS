@@ -162,28 +162,4 @@ class Page
     {
         return $this->category;
     }
-
-    /**
-     * Set roleaccess
-     *
-     * @param string $roleaccess
-     *
-     * @return Page
-     */
-    public function setRoleaccess($roleaccess)
-    {
-        $this->roleaccess = $roleaccess;
-
-        return $this;
-    }
-
-    /**
-     * Get roleaccess
-     *
-     * @return string
-     */
-    public function getRoleaccess()
-    {
-        return $this->roleaccess;
-    }
 }

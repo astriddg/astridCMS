@@ -13,6 +13,8 @@ class PageRepository extends EntityRepository
   public function getPages()
   {
     $query = $this->createQueryBuilder('p')
+      ->leftJoin('p.category', 'c')
+      ->addSelect('c')
       ->getQuery()
     ;
 
@@ -20,22 +22,6 @@ class PageRepository extends EntityRepository
     // Enfin, on retourne l'objet Paginator correspondant à la requête construite
     // (n'oubliez pas le use correspondant en début de fichier)
     return $query
-      ->getResult()
-    ;
-  }
-
-
-  public function getPage($slug)
-  {
-    $qb = $this->createQueryBuilder('p');
-
-    $qb
-      ->where('p.slug = :slug')
-      ->setParameter('slug', $slug)
-    ;
-
-    return $qb
-      ->getQuery()
       ->getResult()
     ;
   }
