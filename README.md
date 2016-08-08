@@ -35,7 +35,7 @@ Download the bundle, add it to your symfony projet, then add the following to th
             
 Add the following to your `app/config/config.yml` :
 ```
-`stof_doctrine_extensions:
+stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
@@ -47,7 +47,7 @@ fos_user:
 
 assetic:
   debug:          '%kernel.debug%'
-  use_controller: '%kernel.debug%'`
+  use_controller: '%kernel.debug%'
 ```
 
 Finally, in the command line, insert the following:
