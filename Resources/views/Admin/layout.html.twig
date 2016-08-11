@@ -10,6 +10,7 @@
     <title>MyCMS - {% block title %}{% endblock %}</title>
 </head>
 <body>
+    {% block bodyempty %}
     <div class="container">
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
             <div class="container">
@@ -25,9 +26,10 @@
                 </div>
             </div><!-- /.container -->
         </nav>
-        <div id="body" style="margin-top:70px;" >{% block body %}{% endblock %}</div>
+        <div id="body" style="margin-top:70px;" >{% block body %}{% endblock body %}</div>
         
     </div>
+{% endblock bodyempty %}
     {% block javascripts %}
     {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
