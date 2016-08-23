@@ -124,7 +124,7 @@ class PageController extends Controller
 
       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
-      return $this->redirectToRoute('oc_core_view', array('slug' => $page->getSlug()));
+      return $this->redirectToRoute('oc_core_view', array('slug' => $page->getSlug(), 'category' =>$page->getCategory()));
     }
 
 
@@ -228,7 +228,7 @@ class PageController extends Controller
 
     if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
       
-      $versions = $em->getRepository('OCCoreBundle:Version')->findBy(array('page_id' => $page->getId()));
+      $versions = $em->getRepository('OCCoreBundle:Version')->findBy(array('page' => $page->getId()));
       foreach ($versions as $version) {
             $em->remove($version);
         }
