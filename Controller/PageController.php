@@ -53,13 +53,9 @@ class PageController extends Controller
     )); 
   }
 
-  /**
-   * @Security("has_role('ROLE_ADMIN')")
-   *
-   */
+
   public function viewAction($slug)
   {
-
 
     $em = $this->getDoctrine()->getManager()->getRepository('OCCoreBundle:Page');
         
@@ -69,29 +65,36 @@ class PageController extends Controller
     
 
     switch($page->getRoleaccess()) {
-      case 'anonymous':
+      case 'Anonymous':
         return $this->render('OCCoreBundle::page.html.twig', array(
         'page'           => $page,
         ));
       break;
 
       case 'ROLE_ADMIN':
-        if (in_array('ROLE_ADMIN', $role=$this->getUser()->getRoles())) {
-          return $this->render('OCCoreBundle::page.html.twig', array(
-          'page'           => $page,
-          ));
+        if ($this->getUser() !== null) {
+          if (in_array('ROLE_ADMIN', $role=$this->getUser()->getRoles())) {
+            return $this->render('OCCoreBundle::page.html.twig', array(
+            'page'           => $page,
+            ));
+          }
         }
         else {
           throw new AccessDeniedException('It looks like you can\t acces this page... ');
+          return $this->redirectToRoute('fos_user_security_login');
         }
       case 'ROLE_USER':
-        if (in_array('ROLE_USER', $role=$this->getUser()->getRoles()) || in_array('ROLE_ADMIN', $role=$this->getUser()->getRoles())) {
-          return $this->render('OCCoreBundle::page.html.twig', array(
-          'page'           => $page,
-          ));
+        if ($this->getUser() !== null) {
+          if (in_array('ROLE_USER', $role=$this->getUser()->getRoles()) || in_array('ROLE_ADMIN', $role=$this->getUser()->getRoles())) {
+            return $this->render('OCCoreBundle::page.html.twig', array(
+            'page'           => $page,
+            ));
+          }
         }
         else {
           throw new AccessDeniedException('It looks like you can\t acces this page... ');
+
+          return $this->redirectToRoute('fos_user_security_login');
         }
 
     }
