@@ -57,6 +57,7 @@ class Page
      * @ORM\Column(name="roleaccess", type="string", length=255, unique=false, nullable=true)
      */
     private $roleaccess;
+<<<<<<< HEAD
 
 
     public function __construct()
@@ -66,6 +67,8 @@ class Page
         }
         
     }
+=======
+>>>>>>> master
 
     /**
      * Get id

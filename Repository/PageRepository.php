@@ -26,5 +26,8 @@ class PageRepository extends EntityRepository
     ;
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 }

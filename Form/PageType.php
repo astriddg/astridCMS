@@ -29,7 +29,11 @@ class PageType extends AbstractType
     {
         $builder
             ->add('title',     TextType::class)
+<<<<<<< HEAD
             ->add('content',     CKEditorBundle::class)
+=======
+            ->add('content',     CKEditorType::class)
+>>>>>>> master
             ->add('save',      SubmitType::class)
             ->add('category', EntityType::class, array(
                 'placeholder' => 'Choose an option',

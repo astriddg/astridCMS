@@ -118,6 +118,39 @@ class PageController extends Controller
       if ($page->getRoleaccess() == '' && $this->container->getParameter('default_access') == true) {
         $page->setRoleaccess($this->container->getParameter('default_access_value'));
       }
+<<<<<<< HEAD
+=======
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($page);
+      $em->flush();
+
+      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+
+      return $this->redirectToRoute('oc_core_view', array('slug' => $page->getSlug(), 'category' =>$page->getCategory()));
+    }
+
+
+    return $this->render('OCCoreBundle:Admin:add.html.twig', array(
+      'form' => $form->createView(),
+    ));
+  }
+
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     */
+    public function addNewCatAction(Request $request)
+  {
+    $page = new Page();
+    $form   = $this->get('form.factory')->create(PageNewCategoryType::class, $page);
+
+    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+      if ($page->getRoleaccess() == '' && $this->container->getParameter('default_access') == true) {
+        $page->setRoleaccess($this->container->getParameter('default_access_value'));
+      }
+
+>>>>>>> master
       $em = $this->getDoctrine()->getManager();
       $em->persist($page);
       $em->flush();
@@ -128,6 +161,7 @@ class PageController extends Controller
     }
 
 
+<<<<<<< HEAD
     return $this->render('OCCoreBundle:Admin:add.html.twig', array(
       'form' => $form->createView(),
     ));
@@ -158,6 +192,8 @@ class PageController extends Controller
     }
 
 
+=======
+>>>>>>> master
     return $this->render('OCCoreBundle:Admin:add.html.twig', array(
       'form' => $form->createView(),
     ));
@@ -228,7 +264,11 @@ class PageController extends Controller
 
     if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
       
+<<<<<<< HEAD
       $versions = $em->getRepository('OCCoreBundle:Version')->findBy(array('page_id' => $page->getId()));
+=======
+      $versions = $em->getRepository('OCCoreBundle:Version')->findBy(array('page' => $page->getId()));
+>>>>>>> master
       foreach ($versions as $version) {
             $em->remove($version);
         }
@@ -259,6 +299,7 @@ class PageController extends Controller
       'page' => $page,
       'versions' => $versions,
     ));
+<<<<<<< HEAD
   }
 
   /**
@@ -305,4 +346,52 @@ class PageController extends Controller
     ));
   }
 
+=======
+  }
+
+  /**
+   * @Security("has_role('ROLE_ADMIN')")
+   *
+   */
+  public function versionAction($id)
+  {
+    $em = $this ->getDoctrine()
+    ->getManager();
+
+    $version = $em->getRepository('OCCoreBundle:Version')->find($id);
+
+    return $this->render('OCCoreBundle::page.html.twig', array(
+      'page'           => $version,
+    ));
+  }
+
+  /**
+   * @Security("has_role('ROLE_ADMIN')")
+   *
+   */
+  public function replaceAction(Version $version)
+  {
+    $em = $this ->getDoctrine()
+    ->getManager();
+
+    $page = $em->getRepository('OCCoreBundle:Page')->find($version->getPage());
+
+
+    $page->setTitle($version->getTitle());
+    $page->setContent($version->getContent());
+
+    $newVersions = $em->getRepository('OCCoreBundle:Version')->getNewVersions($version->getDate());
+    foreach ($newVersions as $newVersion) {
+      $em->remove($newVersion);
+    }
+
+    $em->remove($version);
+    $em->flush(); 
+
+    return $this->render('OCCoreBundle::page.html.twig', array(
+      'page'           => $version,
+    ));
+  }
+
+>>>>>>> master
 }
