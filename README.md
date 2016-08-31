@@ -115,3 +115,8 @@ security:
     - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http }
 
 ```
+## Settings
+
+The settings for this CMS are found in the `config.yml` file in resources.
+To activate versionning, set the versionning parameter to `true`, or to `false` if you want it deactivated.
+If you want default access to be activated, set it to `true` and specify the default access value. If you don't want it, just set the default access to `false`.
