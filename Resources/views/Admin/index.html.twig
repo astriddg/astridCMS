@@ -19,10 +19,11 @@
         <li>
           <a href="{{ path('oc_core_view', {'category': page.category.name, 'slug': page.slug}) }}">
             {{ page.title }}
-          </a> <br>
+          </a> <br> {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
           <a href="{{ path('oc_core_versions', {'slug': page.slug}) }}" class="btn btn-info"> See Old Versions </a>
           <a href="{{ path('oc_core_edit', {'slug': page.slug}) }}" class="btn btn-warning"> Edit </a> 
           <a href="{{ path('oc_core_delete', {'slug': page.slug}) }}" class="btn btn-danger"> Delete </a>
+        {% endif %}
         </li>
       {% endif %}
     {% endfor %}
@@ -30,8 +31,14 @@
   {% endfor %}
       
   
-
+{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
   <a href="{{ path('oc_core_add') }}" class ="btn btn-success" > Ajouter un article </a>
+
+{% else %}
+
+    <a href="{{ path('fos_user_security_login') }}" class ="btn btn-success" > Login </a>
+
+{% endif %}
 
 
 {% endblock %}

@@ -25,10 +25,6 @@ class PageController extends Controller
     return $this->render('OCCoreBundle::home.html.twig');
   }
   
-  /**
-   * @Security("has_role('ROLE_ADMIN')")
-   *
-   */
   public function indexAction()
   {
 
@@ -157,7 +153,7 @@ class PageController extends Controller
 
       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
-      return $this->redirectToRoute('oc_core_view', array('slug' => $page->getSlug()));
+      return $this->redirectToRoute('oc_core_view', array('slug' => $page->getSlug(), 'category' =>$page->getCategory()));
     }
 
 

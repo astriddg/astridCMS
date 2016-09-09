@@ -14,9 +14,9 @@
   {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 
     <a href="{{ path('fos_user_security_login') }}" class ="btn btn-success" > Login </a>
-  {% else %}
+{% endif %}
 
 	<a href="{{ path('oc_core_homepage') }}" class ="btn btn-info" > See Articles </a>
-{% endif %}
+
 
 {% endblock %}

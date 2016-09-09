@@ -3,7 +3,7 @@ oc_core_home:
     defaults: { _controller: OCCoreBundle:Page:home }
 
 oc_core_homepage:
-    path:     /admin
+    path:     /index
     defaults: { _controller: OCCoreBundle:Page:index }
 
 oc_core_view:
